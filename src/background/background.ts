@@ -9,7 +9,7 @@ import active32 from 'assets/active-32.png';
 import inactive16 from 'assets/inactive-16.png';
 import inactive32 from 'assets/inactive-32.png';
 
-let enableRedirect = true;
+let enabled = true;
 
 const HN_URL = 'https://news.ycombinator.com/';
 const HN_ARTICLE_REGEX = /item\?id=(\d+)/;
@@ -17,7 +17,7 @@ const HN_ARTICLE_REGEX = /item\?id=(\d+)/;
 const BRIAN_HN_URL = 'https://brianlovin.com/hn';
 
 browser.webNavigation.onBeforeNavigate.addListener(({ tabId, url }) => {
-  if (!enableRedirect || !url.startsWith(HN_URL)) {
+  if (!enabled || !url.startsWith(HN_URL)) {
     return;
   }
 
@@ -40,8 +40,8 @@ browser.webNavigation.onBeforeNavigate.addListener(({ tabId, url }) => {
 });
 
 browser.browserAction.onClicked.addListener(() => {
-  enableRedirect = !enableRedirect;
-  setIcon(enableRedirect);
+  enabled = !enabled;
+  setIcon(enabled);
 });
 
 function setIcon(active: boolean) {
