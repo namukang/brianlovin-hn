@@ -4,6 +4,11 @@ import 'images/icon-16.png';
 import 'images/icon-48.png';
 import 'images/icon-128.png';
 
+import active16 from 'assets/active-16.png';
+import active32 from 'assets/active-32.png';
+import inactive16 from 'assets/inactive-16.png';
+import inactive32 from 'assets/inactive-32.png';
+
 let enableRedirect = true;
 
 const HN_URL = 'https://news.ycombinator.com/';
@@ -11,7 +16,7 @@ const HN_ARTICLE_REGEX = /item\?id=(\d+)/;
 
 const BRIAN_HN_URL = 'https://brianlovin.com/hn';
 
-browser.webNavigation.onBeforeNavigate.addListener(async ({ tabId, url }) => {
+browser.webNavigation.onBeforeNavigate.addListener(({ tabId, url }) => {
   if (!enableRedirect || !url.startsWith(HN_URL)) {
     return;
   }
@@ -36,4 +41,17 @@ browser.webNavigation.onBeforeNavigate.addListener(async ({ tabId, url }) => {
 
 browser.browserAction.onClicked.addListener(() => {
   enableRedirect = !enableRedirect;
+  setIcon(enableRedirect);
 });
+
+function setIcon(active: boolean) {
+  const path16 = active ? active16 : inactive16;
+  const path32 = active ? active32 : inactive32;
+
+  browser.browserAction.setIcon({
+    path: {
+      16: path16,
+      32: path32,
+    },
+  });
+}
