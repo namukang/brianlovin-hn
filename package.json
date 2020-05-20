@@ -1,7 +1,7 @@
 {
-  "name": "extension-starter-kit",
+  "name": "brianlovin-hn",
   "version": "0.0.1",
-  "description": "Extension Starter Kit",
+  "description": "Brian HN",
   "private": true,
   "scripts": {
     "tsc": "tsc --noEmit",
