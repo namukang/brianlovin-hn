@@ -4,6 +4,8 @@ Redirects Hacker News to [Brian Lovin's HN client](https://brianlovin.com/hn).
 
 Built with [extension-starter-kit](https://github.com/dkthehuman/extension-starter-kit).
 
+Made for fun after seeing [Brian's tweet](https://twitter.com/brian_lovin/status/1263183338124140544).
+
 ## Development
 
 ### Chrome
