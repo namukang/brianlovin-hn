@@ -1,24 +1,8 @@
-# Extension Starter Kit
+# Brian Lovin HN
 
-🔥 Starter kit for building Chrome/Firefox extensions
+Redirects Hacker News to [Brian Lovin's HN client](https://brianlovin.com/hn).
 
-### Supported
-
-- Typescript
-- React
-- Bootstrap
-- CSS Modules
-- Live reloading
-
-## How It Works
-
-The extension starter kit uses [`webextension-polyfill`](https://github.com/mozilla/webextension-polyfill) which allows you to build extensions that automatically work on both Chrome and Firefox!
-
-### Content Scripts
-
-An example content script is included in `src/contentScripts/example.ts`. Webpack outputs processed files as `[name].bundle.js`, so in `manifest.json`, the content script is loaded as `example.bundle.js`.
-
-After loading Extension Starter Kit, visit http://example.com and open the console to see the example content script in action.
+Built with [extension-starter-kit](https://github.com/dkthehuman/extension-starter-kit).
 
 ## Development
 
