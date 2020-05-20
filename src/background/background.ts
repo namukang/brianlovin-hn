@@ -4,13 +4,15 @@ import 'images/icon-16.png';
 import 'images/icon-48.png';
 import 'images/icon-128.png';
 
+let enableRedirect = true;
+
 const HN_URL = 'https://news.ycombinator.com/';
 const HN_ARTICLE_REGEX = /item\?id=(\d+)/;
 
 const BRIAN_HN_URL = 'https://brianlovin.com/hn';
 
 browser.webNavigation.onBeforeNavigate.addListener(async ({ tabId, url }) => {
-  if (!url.startsWith(HN_URL)) {
+  if (!enableRedirect || !url.startsWith(HN_URL)) {
     return;
   }
 
@@ -30,4 +32,8 @@ browser.webNavigation.onBeforeNavigate.addListener(async ({ tabId, url }) => {
       url: `${BRIAN_HN_URL}/${itemID}`,
     });
   }
+});
+
+browser.browserAction.onClicked.addListener(() => {
+  enableRedirect = !enableRedirect;
 });
