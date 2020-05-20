@@ -1,7 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const packageJson = require('./package.json');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ZipPlugin = require('zip-webpack-plugin');
@@ -25,7 +24,7 @@ function getStyleLoaders({ cssOptions = {}, preProcessor } = {}) {
       // Run PostCSS actions
       loader: 'postcss-loader',
       options: {
-        plugins: function() {
+        plugins: function () {
           return [require('autoprefixer')];
         },
       },
@@ -44,10 +43,6 @@ module.exports = (env, argv) => {
   return {
     entry: {
       background: './src/background/background.ts',
-      popup: './src/components/Popup/index.tsx',
-      options: './src/components/Options/index.tsx',
-      welcome: './src/components/Welcome/index.tsx',
-      example: './src/contentScripts/example.ts',
     },
 
     // Use built-in optimizations based on mode
@@ -158,7 +153,7 @@ module.exports = (env, argv) => {
       new CopyWebpackPlugin([
         {
           from: 'src/manifest.json',
-          transform: content => {
+          transform: (content) => {
             const manifest = JSON.parse(content.toString());
             // Use fields from package.json for manifest
             const manifestFields = {
@@ -195,29 +190,10 @@ module.exports = (env, argv) => {
         },
       ]),
 
-      // Generate HTML files
-      new HtmlWebpackPlugin({
-        template: path.join(__dirname, 'src', 'index.html'),
-        filename: 'popup.html',
-        chunks: ['popup'],
-      }),
-
-      new HtmlWebpackPlugin({
-        template: path.join(__dirname, 'src', 'index.html'),
-        filename: 'options.html',
-        chunks: ['options'],
-      }),
-
-      new HtmlWebpackPlugin({
-        template: path.join(__dirname, 'src', 'index.html'),
-        filename: 'welcome.html',
-        chunks: ['welcome'],
-      }),
-
       !isDev &&
         new ZipPlugin({
           filename: `${packageJson.name}-v${packageJson.version}.zip`,
         }),
-    ].filter(plugin => !!plugin),
+    ].filter((plugin) => !!plugin),
   };
 };
